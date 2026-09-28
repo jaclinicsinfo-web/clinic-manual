@@ -8,8 +8,23 @@ function printDisponivel(arquivo: string) {
   return existsSync(path.join(process.cwd(), "public", "prints", arquivo));
 }
 
+function Figura({ arquivo, alt, legenda }: { arquivo: string; alt: string; legenda: string }) {
+  return (
+    <figure className="overflow-hidden rounded-xl border border-border bg-card shadow-sm">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={`/prints/${arquivo}`} alt={alt} className="w-full bg-muted" />
+      <figcaption className="border-t border-border px-4 py-3 text-sm text-muted-foreground">{legenda}</figcaption>
+    </figure>
+  );
+}
+
 export function Artigo({ capitulo }: { capitulo: Capitulo }) {
   const prints = capitulo.prints.filter((print) => printDisponivel(print.arquivo));
+  const porArquivo = new Map(prints.map((print) => [print.arquivo, print]));
+  const usados = new Set(capitulo.passos.flatMap((passo) => passo.imagens ?? []));
+  const soltos = prints.filter((print) => !usados.has(print.arquivo));
+  const passosComImagem = capitulo.passos.some((passo) => (passo.imagens?.length ?? 0) > 0);
+
   return (
     <article className="mx-auto max-w-3xl px-6 py-10">
       <p className="text-xs font-semibold tracking-wide text-primary uppercase">{capitulo.grupo}</p>
@@ -21,30 +36,36 @@ export function Artigo({ capitulo }: { capitulo: Capitulo }) {
         {capitulo.acesso}
       </div>
 
-      {prints.length > 0 && (
+      {!passosComImagem && soltos.length > 0 && (
         <div className="mt-8 space-y-6">
-          {prints.map((print) => (
-            <figure key={print.arquivo} className="overflow-hidden rounded-xl border border-border bg-card shadow-sm">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={`/prints/${print.arquivo}`} alt={print.alt} className="w-full bg-muted" />
-              <figcaption className="border-t border-border px-4 py-3 text-sm text-muted-foreground">{print.legenda}</figcaption>
-            </figure>
+          {soltos.map((print) => (
+            <Figura key={print.arquivo} {...print} />
           ))}
         </div>
       )}
 
-      <ol className="mt-10 space-y-6">
-        {capitulo.passos.map((passo, index) => (
-          <li key={passo.titulo} className="flex gap-4">
-            <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">
-              {index + 1}
-            </span>
-            <div>
-              <h2 className="text-base font-semibold">{passo.titulo}</h2>
-              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{passo.texto}</p>
-            </div>
-          </li>
-        ))}
+      <ol className="mt-10 space-y-12">
+        {capitulo.passos.map((passo, index) => {
+          const figuras = (passo.imagens ?? [])
+            .map((arquivo) => porArquivo.get(arquivo))
+            .filter((print) => print !== undefined);
+          return (
+            <li key={passo.titulo} className="space-y-4">
+              <div className="flex gap-4">
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">
+                  {index + 1}
+                </span>
+                <div>
+                  <h2 className="text-base font-semibold">{passo.titulo}</h2>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{passo.texto}</p>
+                </div>
+              </div>
+              {figuras.map((print) => (
+                <Figura key={print.arquivo} {...print} />
+              ))}
+            </li>
+          );
+        })}
       </ol>
 
       {capitulo.dicas && capitulo.dicas.length > 0 && (
