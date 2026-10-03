@@ -44,9 +44,9 @@ Do começo do uso até a configuração, para o texto de um módulo poder citar 
 | 11 | Estoque | `estoque` | feito |
 | 12 | RH | `rh` | feito |
 | 13 | Relatórios | `relatorios` | feito |
-| 14 | Integrações e lembretes | `integracoes` | pendente |
-| 15 | Power BI e Agente de IA | `em-breve` | pendente |
-| 16 | Configurações | `configuracoes` | pendente |
+| 14 | Integrações e lembretes | `integracoes` | feito |
+| 15 | Power BI e Agente de IA | `em-breve` | feito |
+| 16 | Configurações | `configuracoes` | feito |
 
 ## O que fotografar em cada módulo
 
@@ -106,17 +106,12 @@ Feito. Sem formulário. A primeira aba é `relatorios.png`: Faturamento em Este 
 
 ### 14. Integrações e lembretes
 
-- Listas: dashboard, configurações, lembretes, histórico
-- Ainda falta: nova regra, novo template
-- Só faz sentido com o plano que libera o módulo. Se aparecer cadeado, o print do cadeado substitui os formulários.
+Feito. O plano desta clínica é Ilimitado, então o módulo abre. O dashboard é `integracoes.png`: de 01/10/2026 a 02/10/2026, cards em zero e Últimos envios vazio. A configuração é `integracoes-config.png`: lembretes desligados, WhatsApp ligado, cobrança na conta da clínica e credenciais em branco. A URL do webhook fica fora de foco. As regras são `lembretes.png` e o formulário é `integracoes-regra.png` (Lembrete da véspera, 1440 minutos, Lembrete WhatsApp). Os templates são `lembretes-templates.png` e o formulário é `integracoes-template.png` (Lembrete de consulta, lembrete_consulta, pt_BR, Utility). O histórico é `historico-envios.png`, ainda sem envio. O e-mail não se configura aqui.
 
 ### 15. Power BI e Agente de IA
 
-- Listas: as duas telas reservadas
-- Conferir se o texto ainda é “em breve” ou se a função já opera. Sem formulário enquanto forem só aviso.
+Feito. As duas telas continuam aviso, sem formulário. No Ilimitado o título é Em breve neste plano. Figuras `power-bi.png` e `agente-ia.png`.
 
 ### 16. Configurações
 
-- Listas: dados da clínica, usuários, procedimentos, formas de pagamento, estilização
-- Perfis e permissões entra no módulo 3, para não repetir a mesma captura
-- Ainda falta: nova unidade, novo usuário, alterar perfil, novo procedimento
+Feito. A identificação é `clinica.png` (Luna - Centro de Desenvolvimento Infantil; CNPJ, telefone e e-mail fora de foco). O endereço e a unidade são `configuracoes-unidades.png`: Franca, SP, Sede Franca, Ativo. Os diálogos são `configuracoes-unidade.png` (Unidade Centro), `configuracoes-usuario.png` (Recepção, Sede Franca), `configuracoes-perfil.png` (Gestor) e `configuracoes-procedimento.png` (Retorno, Consulta, 30 min, R$ 150,00). As listas são `usuarios.png` (Ilimitado · 7 usuários · sem limite; o nome é Usuário teste), `procedimentos.png` (Avaliação, Consulta e Valor Alterado), `pagamentos.png` (as seis formas ligadas) e `estilizacao.png` (Claro em uso). Perfis e permissões permanece no módulo 3.
