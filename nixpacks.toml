@@ -1,0 +1,15 @@
+[variables]
+NIXPACKS_NODE_VERSION = "20"
+PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1"
+
+[phases.setup]
+nixPkgs = ["nodejs_20"]
+
+[phases.install]
+cmds = ["npm ci --include=dev --include=optional"]
+
+[phases.build]
+cmds = ["npm run build"]
+
+[start]
+cmd = "npm run start"

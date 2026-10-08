@@ -2,10 +2,13 @@
   "name": "clinic-manual",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "20"
+  },
   "scripts": {
     "dev": "next dev --turbopack --port 3002",
     "build": "next build",
-    "start": "next start --port 3002",
+    "start": "next start -H 0.0.0.0",
     "lint": "next lint",
     "prints": "node scripts/capturar-prints.mjs"
   },
